@@ -326,7 +326,6 @@
 
   .final-insight em { color: var(--gold); font-style: italic; }
 
-  /* ===== CELEBRATION ===== */
   .confetti-canvas {
     position: fixed;
     top: 0; left: 0;
@@ -365,7 +364,6 @@
     animation: fadeUp 0.5s ease 0.35s both;
   }
 
-  /* Keep screen open banner */
   .keep-open-banner {
     background: linear-gradient(135deg, #D4A843 0%, #C97B3A 100%);
     color: var(--dark);
@@ -484,8 +482,8 @@
     <div class="insight" id="pattern-insight"></div>
     <div class="card">
       <div class="card-question">What do your stories have in common?</div>
-      <div class="card-hint">In your own words — what ingredients showed up in every story?</div>
-      <textarea id="common-input" placeholder="We noticed that all of our stories include..."></textarea>
+      <div class="card-hint">In your own words — what ingredients showed up in every story? Which ones didn't?</div>
+      <textarea id="common-input" placeholder="We noticed that all of our stories include... but not all of them had..."></textarea>
     </div>
     <div class="btn-row">
       <button class="btn btn-ghost" onclick="goTo(1)">← Back</button>
@@ -523,7 +521,7 @@
     <div class="summary-box" id="final-summary"></div>
 
     <div class="insight">
-      <p>Most stories share the same building blocks: <strong>characters, conflict, a sequence of events, and change</strong>. Even when stories feel totally different on the surface, those ingredients usually show up.</p>
+      <p>Some elements — like <strong>conflict</strong> — show up in almost every story. But others — like <strong>a villain</strong> or <strong>a happy ending</strong> — don't always make the cut. That's the interesting part. Stories share some ingredients, but not all of them. So what's required, and what's a choice the author makes?</p>
     </div>
 
     <div class="final-insight">
@@ -541,11 +539,12 @@
 
 <script>
   const ELEMENTS = [
-    { id: 'characters', label: 'Characters', desc: 'Are there people (or beings) you follow?' },
-    { id: 'conflict', label: 'Conflict', desc: 'Is there a problem, struggle, or tension?' },
-    { id: 'sequence', label: 'Sequence of events', desc: 'Do things happen in an order that matters?' },
-    { id: 'change', label: 'Change', desc: 'Does someone or something change by the end?' },
-    { id: 'perspective', label: 'Point of view', desc: 'Is someone telling or showing the story?' }
+    { id: 'conflict', label: 'A main conflict', desc: 'Is there a central problem, struggle, or tension driving things forward?' },
+    { id: 'hero', label: 'A likable hero', desc: 'Is there a main character you actually root for?' },
+    { id: 'villain', label: 'A villain', desc: 'Is there a clear bad guy or antagonist working against the hero?' },
+    { id: 'lesson', label: 'A lesson or message', desc: 'Does the story teach you something or say something bigger about life?' },
+    { id: 'happy', label: 'A happy ending', desc: 'Does everything work out in the end?' },
+    { id: 'unexpected', label: 'Something unexpected', desc: 'Is there a twist, surprise, or moment you didn\'t see coming?' }
   ];
 
   let storyNames = ['', '', ''];
@@ -569,7 +568,7 @@
 
     document.getElementById('next-1').addEventListener('click', () => {
       const answered = Object.keys(answers).length;
-      if (answered < 8) {
+      if (answered < 10) {
         alert('Try to answer more of the questions — go through each story tab.');
         return;
       }
@@ -669,6 +668,8 @@
     html += '<th style="text-align:center">All 3?</th></tr></thead><tbody>';
 
     let allYesElements = [];
+    let mixedElements = [];
+
     ELEMENTS.forEach(el => {
       html += `<tr><td>${el.label}</td>`;
       let yesCount = 0;
@@ -681,16 +682,19 @@
       }
       const allYes = yesCount === 3;
       if (allYes) allYesElements.push(el.label);
+      else if (yesCount > 0) mixedElements.push(el.label);
       html += `<td class="center"><span class="dot ${allYes ? 'yes' : 'no'}"></span></td></tr>`;
     });
     html += '</tbody>';
     table.innerHTML = html;
 
     const ins = document.getElementById('pattern-insight');
-    if (allYesElements.length >= 3) {
+    if (allYesElements.length >= 3 && mixedElements.length > 0) {
+      ins.innerHTML = `<p><strong>${allYesElements.join(', ')}</strong> showed up in all three stories. But <strong>${mixedElements.join(', ')}</strong> only showed up in some. So there's a pattern — but it's not the same for everything. What does that tell you about what a story actually <em>needs</em>?</p>`;
+    } else if (allYesElements.length >= 3) {
       ins.innerHTML = `<p>Look at that — <strong>${allYesElements.join(', ')}</strong> showed up in all three of your stories. That's ${allYesElements.length} out of ${ELEMENTS.length} elements in common. Seems like there might be a pattern here.</p>`;
     } else if (allYesElements.length > 0) {
-      ins.innerHTML = `<p>Interesting — <strong>${allYesElements.join(', ')}</strong> showed up in all three stories. Some elements were shared, some weren't. What does that tell you?</p>`;
+      ins.innerHTML = `<p>Interesting — <strong>${allYesElements.join(', ')}</strong> showed up in all three stories, but a lot of the other elements didn't. Some things seem essential, and some seem like choices. What do you think?</p>`;
     } else {
       ins.innerHTML = `<p>Looks like your stories didn't share many elements across all three. That's interesting too — does that mean there's no pattern, or that patterns show up in different ways?</p>`;
     }
@@ -707,12 +711,14 @@
     const evidence = document.getElementById('claim-evidence').value.trim() || '(no evidence written)';
 
     let allYes = [];
+    let notAll = [];
     ELEMENTS.forEach(el => {
       let count = 0;
       for (let i = 0; i < 3; i++) {
         if (answers[i + '-' + el.id] === 'yes') count++;
       }
       if (count === 3) allYes.push(el.label.toLowerCase());
+      else notAll.push(el.label.toLowerCase());
     });
 
     const claimText = claimChoice === 'yes' ? 'DID follow a pattern' :
@@ -723,7 +729,8 @@
     box.innerHTML = `
       <p>Your group looked at <span class="highlight">${storyNames[0]}</span>, <span class="highlight">${storyNames[1]}</span>, and <span class="highlight">${storyNames[2]}</span>.</p>
       <br>
-      <p>You found that all three stories shared: <span class="highlight">${allYes.length > 0 ? allYes.join(', ') : 'few common elements'}</span>.</p>
+      <p>All three stories shared: <span class="highlight">${allYes.length > 0 ? allYes.join(', ') : 'few common elements'}</span>.</p>
+      ${notAll.length > 0 ? `<br><p>But not all of them had: <span class="highlight">${notAll.join(', ')}</span>.</p>` : ''}
       <br>
       <p>Your claim: Your stories <span class="highlight">${claimText}</span>.</p>
       <br>
@@ -767,7 +774,7 @@
         p.y += p.vy;
         p.x += p.vx;
         p.rotation += p.rotSpeed;
-        p.vy += 0.02; // gravity
+        p.vy += 0.02;
         if (frame > maxFrames - 80) p.opacity = Math.max(0, p.opacity - 0.014);
 
         ctx.save();
