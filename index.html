@@ -31,7 +31,6 @@
     overflow-x: hidden;
   }
 
-  /* Subtle grain overlay */
   body::before {
     content: '';
     position: fixed;
@@ -47,7 +46,6 @@
     padding: 2rem 1.5rem 4rem;
   }
 
-  /* Header */
   .header {
     text-align: center;
     margin-bottom: 2.5rem;
@@ -72,10 +70,7 @@
     margin-bottom: 0.5rem;
   }
 
-  .header h1 em {
-    color: var(--gold);
-    font-style: italic;
-  }
+  .header h1 em { color: var(--gold); font-style: italic; }
 
   .header p {
     color: var(--text-dim);
@@ -85,12 +80,7 @@
     line-height: 1.5;
   }
 
-  /* Progress */
-  .progress-bar {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 2.5rem;
-  }
+  .progress-bar { display: flex; gap: 6px; margin-bottom: 2.5rem; }
 
   .progress-segment {
     flex: 1;
@@ -98,22 +88,12 @@
     background: var(--dark-border);
     border-radius: 2px;
     transition: background 0.5s ease;
-    position: relative;
   }
 
-  .progress-segment.active {
-    background: var(--gold);
-  }
+  .progress-segment.active { background: var(--gold); }
+  .progress-segment.completed { background: var(--green); }
 
-  .progress-segment.completed {
-    background: var(--green);
-  }
-
-  .step-label {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-  }
+  .step-label { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
 
   .step-label span {
     font-size: 0.65rem;
@@ -123,31 +103,17 @@
     transition: color 0.3s;
   }
 
-  .step-label span.active {
-    color: var(--gold);
-    font-weight: 600;
-  }
+  .step-label span.active { color: var(--gold); font-weight: 600; }
+  .step-label span.completed { color: var(--green); }
 
-  .step-label span.completed {
-    color: var(--green);
-  }
-
-  /* Pages */
-  .page {
-    display: none;
-    animation: fadeUp 0.4s ease;
-  }
-
-  .page.active {
-    display: block;
-  }
+  .page { display: none; animation: fadeUp 0.4s ease; }
+  .page.active { display: block; }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Cards */
   .card {
     background: var(--dark-card);
     border: 1px solid var(--dark-border);
@@ -170,10 +136,7 @@
     line-height: 1.5;
   }
 
-  /* Inputs */
-  .input-group {
-    margin-bottom: 1rem;
-  }
+  .input-group { margin-bottom: 1rem; }
 
   .input-group label {
     display: block;
@@ -198,25 +161,11 @@
     outline: none;
   }
 
-  input[type="text"]:focus, textarea:focus {
-    border-color: var(--gold);
-  }
+  input[type="text"]:focus, textarea:focus { border-color: var(--gold); }
+  textarea { resize: vertical; min-height: 80px; }
+  input::placeholder, textarea::placeholder { color: #555; }
 
-  textarea {
-    resize: vertical;
-    min-height: 80px;
-  }
-
-  input::placeholder, textarea::placeholder {
-    color: #555;
-  }
-
-  /* Toggle grid for yes/no questions */
-  .toggle-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
+  .toggle-grid { display: flex; flex-direction: column; gap: 0.75rem; }
 
   .toggle-row {
     display: flex;
@@ -226,26 +175,13 @@
     border: 1px solid var(--dark-border);
     border-radius: 10px;
     padding: 0.85rem 1.1rem;
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.2s;
   }
 
-  .toggle-row .element-label {
-    font-size: 0.95rem;
-    font-weight: 500;
-  }
+  .toggle-row .element-label { font-size: 0.95rem; font-weight: 500; }
+  .toggle-row .element-desc { font-size: 0.78rem; color: var(--text-dim); margin-top: 2px; }
 
-  .toggle-row .element-desc {
-    font-size: 0.78rem;
-    color: var(--text-dim);
-    margin-top: 2px;
-  }
-
-  .toggle-btns {
-    display: flex;
-    gap: 6px;
-    flex-shrink: 0;
-    margin-left: 1rem;
-  }
+  .toggle-btns { display: flex; gap: 6px; flex-shrink: 0; margin-left: 1rem; }
 
   .toggle-btn {
     width: 42px;
@@ -261,28 +197,11 @@
     font-family: 'DM Sans', sans-serif;
   }
 
-  .toggle-btn:hover {
-    border-color: var(--text-dim);
-  }
+  .toggle-btn:hover { border-color: var(--text-dim); }
+  .toggle-btn.selected-yes { background: var(--green); border-color: var(--green); color: #fff; }
+  .toggle-btn.selected-no { background: var(--red-soft); border-color: var(--red-soft); color: #fff; }
 
-  .toggle-btn.selected-yes {
-    background: var(--green);
-    border-color: var(--green);
-    color: #fff;
-  }
-
-  .toggle-btn.selected-no {
-    background: var(--red-soft);
-    border-color: var(--red-soft);
-    color: #fff;
-  }
-
-  /* Story tabs */
-  .story-tabs {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 1.5rem;
-  }
+  .story-tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; }
 
   .story-tab {
     padding: 0.45rem 1rem;
@@ -297,19 +216,9 @@
     transition: all 0.2s;
   }
 
-  .story-tab.active {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--dark);
-  }
+  .story-tab.active { background: var(--gold); border-color: var(--gold); color: var(--dark); }
 
-  /* Results matrix */
-  .matrix {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-    font-size: 0.85rem;
-  }
+  .matrix { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
 
   .matrix th {
     text-align: left;
@@ -328,21 +237,12 @@
     vertical-align: middle;
   }
 
-  .matrix .dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin: 0 auto;
-  }
-
+  .matrix .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
   .matrix .dot.yes { background: var(--green); box-shadow: 0 0 6px var(--green-glow); }
   .matrix .dot.no { background: var(--red-soft); }
   .matrix .dot.unanswered { background: var(--dark-border); }
-
   .matrix td.center { text-align: center; }
 
-  /* Insight callout */
   .insight {
     background: var(--gold-glow);
     border-left: 3px solid var(--gold);
@@ -351,24 +251,10 @@
     margin: 1.5rem 0;
   }
 
-  .insight p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--text);
-  }
+  .insight p { font-size: 0.95rem; line-height: 1.6; color: var(--text); }
+  .insight strong { color: var(--gold); }
 
-  .insight strong {
-    color: var(--gold);
-  }
-
-  /* Buttons */
-  .btn-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2rem;
-    gap: 1rem;
-  }
+  .btn-row { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; gap: 1rem; }
 
   .btn {
     padding: 0.7rem 1.75rem;
@@ -381,33 +267,8 @@
     transition: all 0.2s;
   }
 
-  .btn-primary {
-    background: var(--gold);
-    color: var(--dark);
-  }
-
-  .btn-primary:hover {
-    background: #E0B850;
-    transform: translateY(-1px);
-  }
-
-  .btn-primary:disabled {
-    background: var(--dark-border);
-    color: #555;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--text-dim);
-    border: 1px solid var(--dark-border);
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--text-dim);
-    color: var(--text);
-  }
+  .btn-primary { background: var(--gold); color: var(--dark); }
+  .btn-primary:hover { background: #E0B850; transform: translateY(-1px); }
 
   .btn-ghost {
     background: none;
@@ -421,12 +282,7 @@
 
   .btn-ghost:hover { color: var(--text); }
 
-  /* Claim section */
-  .claim-toggle {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 1.25rem;
-  }
+  .claim-toggle { display: flex; gap: 10px; margin-bottom: 1.25rem; }
 
   .claim-option {
     flex: 1;
@@ -436,7 +292,7 @@
     background: var(--dark);
     color: var(--text-dim);
     font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     cursor: pointer;
     text-align: center;
@@ -444,14 +300,8 @@
   }
 
   .claim-option:hover { border-color: var(--text-dim); }
+  .claim-option.selected { border-color: var(--gold); color: var(--gold); background: var(--gold-glow); }
 
-  .claim-option.selected {
-    border-color: var(--gold);
-    color: var(--gold);
-    background: var(--gold-glow);
-  }
-
-  /* Final summary */
   .summary-box {
     background: var(--dark);
     border: 1px solid var(--dark-border);
@@ -462,16 +312,7 @@
     font-size: 0.95rem;
   }
 
-  .summary-box .highlight {
-    color: var(--gold);
-    font-weight: 600;
-  }
-
-  .trophy {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
+  .summary-box .highlight { color: var(--gold); font-weight: 600; }
 
   .final-insight {
     font-family: 'DM Serif Display', serif;
@@ -483,12 +324,80 @@
     margin: 1.5rem auto;
   }
 
-  .final-insight em {
-    color: var(--gold);
-    font-style: italic;
+  .final-insight em { color: var(--gold); font-style: italic; }
+
+  /* ===== CELEBRATION ===== */
+  .confetti-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 9998;
   }
 
-  /* Responsive */
+  .celebration-emoji {
+    font-size: 4.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    animation: bounceIn 0.6s ease;
+  }
+
+  @keyframes bounceIn {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .celebration-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+    text-align: center;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+    animation: fadeUp 0.5s ease 0.2s both;
+  }
+
+  .celebration-subtitle {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.5s ease 0.35s both;
+  }
+
+  /* Keep screen open banner */
+  .keep-open-banner {
+    background: linear-gradient(135deg, #D4A843 0%, #C97B3A 100%);
+    color: var(--dark);
+    border-radius: 14px;
+    padding: 1.75rem 2rem;
+    text-align: center;
+    margin: 2.5rem 0 1rem;
+    animation: pulseBorder 2s ease-in-out infinite alternate;
+    box-shadow: 0 0 30px rgba(212, 168, 67, 0.25);
+  }
+
+  .keep-open-banner .banner-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+
+  .keep-open-banner .banner-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .keep-open-banner .banner-sub {
+    font-size: 0.88rem;
+    margin-top: 0.4rem;
+    opacity: 0.85;
+    font-weight: 500;
+  }
+
+  @keyframes pulseBorder {
+    from { box-shadow: 0 0 20px rgba(212, 168, 67, 0.2); }
+    to { box-shadow: 0 0 45px rgba(212, 168, 67, 0.45); }
+  }
+
   @media (max-width: 600px) {
     .container { padding: 1.25rem 1rem 3rem; }
     .card { padding: 1.25rem; }
@@ -496,21 +405,22 @@
     .toggle-btns { margin-left: 0; }
     .matrix { font-size: 0.75rem; }
     .matrix th, .matrix td { padding: 0.45rem 0.5rem; }
+    .claim-toggle { flex-direction: column; }
   }
 </style>
 </head>
 <body>
 
+<canvas class="confetti-canvas" id="confetti-canvas"></canvas>
+
 <div class="container">
 
-  <!-- Header -->
   <div class="header">
     <div class="header-label">Breakout Room Activity</div>
     <h1>Do All Stories Follow a <em>Pattern?</em></h1>
     <p>Work with your group to figure out what every story has in common. Answer the questions on each page — and see what you discover.</p>
   </div>
 
-  <!-- Step Labels -->
   <div class="step-label">
     <span id="label-0" class="active">Stories</span>
     <span id="label-1">Breakdown</span>
@@ -526,22 +436,22 @@
     <div class="progress-segment" id="seg-4"></div>
   </div>
 
-  <!-- PAGE 0: List Stories -->
+  <!-- PAGE 0 -->
   <div class="page active" id="page-0">
     <div class="card">
       <div class="card-question">What are 3 stories your whole group knows?</div>
       <div class="card-hint">Movies, books, shows, video games, real-life stories — anything counts. Pick ones everyone in the group can talk about.</div>
       <div class="input-group">
         <label>Story 1</label>
-        <input type="text" id="story-1" placeholder='e.g. "The Lion King"'>
+        <input type="text" id="story-1" placeholder="A movie your group all knows">
       </div>
       <div class="input-group">
         <label>Story 2</label>
-        <input type="text" id="story-2" placeholder='e.g. "Spider-Man: Into the Spider-Verse"'>
+        <input type="text" id="story-2" placeholder="A book, show, or video game">
       </div>
       <div class="input-group">
         <label>Story 3</label>
-        <input type="text" id="story-3" placeholder='e.g. "A family immigration story"'>
+        <input type="text" id="story-3" placeholder="A real-life story or something else">
       </div>
     </div>
     <div class="btn-row">
@@ -550,17 +460,13 @@
     </div>
   </div>
 
-  <!-- PAGE 1: Break Down Each Story -->
+  <!-- PAGE 1 -->
   <div class="page" id="page-1">
     <div class="card">
       <div class="card-question">Now break each story down.</div>
       <div class="card-hint">For each of your stories, answer: does it have these elements? Go through all three — use the tabs to switch between stories.</div>
-
       <div class="story-tabs" id="story-tabs"></div>
-
-      <div class="toggle-grid" id="toggle-grid">
-        <!-- rows built by JS -->
-      </div>
+      <div class="toggle-grid" id="toggle-grid"></div>
     </div>
     <div class="btn-row">
       <button class="btn btn-ghost" onclick="goTo(0)">← Back</button>
@@ -568,66 +474,53 @@
     </div>
   </div>
 
-  <!-- PAGE 2: See the Pattern -->
+  <!-- PAGE 2 -->
   <div class="page" id="page-2">
     <div class="card">
       <div class="card-question">Here's what you found.</div>
       <div class="card-hint">Look at the matrix below. What do you notice?</div>
-      <table class="matrix" id="results-matrix">
-        <!-- built by JS -->
-      </table>
+      <table class="matrix" id="results-matrix"></table>
     </div>
-
-    <div class="insight" id="pattern-insight">
-      <!-- filled by JS -->
-    </div>
-
+    <div class="insight" id="pattern-insight"></div>
     <div class="card">
-      <div class="card-question">What do all your stories have in common?</div>
+      <div class="card-question">What do your stories have in common?</div>
       <div class="card-hint">In your own words — what ingredients showed up in every story?</div>
       <textarea id="common-input" placeholder="We noticed that all of our stories include..."></textarea>
     </div>
-
     <div class="btn-row">
       <button class="btn btn-ghost" onclick="goTo(1)">← Back</button>
       <button class="btn btn-primary" id="next-2">Next →</button>
     </div>
   </div>
 
-  <!-- PAGE 3: Make a Claim -->
+  <!-- PAGE 3 -->
   <div class="page" id="page-3">
     <div class="card">
       <div class="card-question">Time to make your claim.</div>
-      <div class="card-hint">Based on what you found — do all stories follow a pattern?</div>
-
+      <div class="card-hint">Based on what you found — did your stories follow a pattern?</div>
       <div class="claim-toggle">
-        <button class="claim-option" id="claim-yes" onclick="selectClaim('yes')">Yes, they do</button>
-        <button class="claim-option" id="claim-no" onclick="selectClaim('no')">No, they don't</button>
+        <button class="claim-option" id="claim-yes" onclick="selectClaim('yes')">Yeah, they did</button>
+        <button class="claim-option" id="claim-kinda" onclick="selectClaim('kinda')">Kind of</button>
+        <button class="claim-option" id="claim-no" onclick="selectClaim('no')">Not really</button>
       </div>
-
       <div class="input-group">
         <label>Why? Use evidence from your stories.</label>
-        <textarea id="claim-evidence" placeholder="Stories DO / DO NOT follow a pattern because we noticed that..."></textarea>
+        <textarea id="claim-evidence" placeholder="Our stories did / didn't follow a pattern because we noticed that..."></textarea>
       </div>
     </div>
-
     <div class="btn-row">
       <button class="btn btn-ghost" onclick="goTo(2)">← Back</button>
       <button class="btn btn-primary" id="next-3">See What You Discovered →</button>
     </div>
   </div>
 
-  <!-- PAGE 4: Discovery / Reveal -->
+  <!-- PAGE 4 -->
   <div class="page" id="page-4">
-    <div class="trophy">🔍</div>
+    <div class="celebration-emoji">🏆</div>
+    <div class="celebration-title">Congrats — You're Teamwork Masters</div>
+    <div class="celebration-subtitle">You just reverse-engineered what makes a story a story.</div>
 
-    <div class="card">
-      <div class="card-question" style="text-align:center;">Here's what you just figured out.</div>
-    </div>
-
-    <div class="summary-box" id="final-summary">
-      <!-- built by JS -->
-    </div>
+    <div class="summary-box" id="final-summary"></div>
 
     <div class="insight">
       <p>Most stories share the same building blocks: <strong>characters, conflict, a sequence of events, and change</strong>. Even when stories feel totally different on the surface, those ingredients usually show up.</p>
@@ -637,40 +530,30 @@
       If stories follow patterns, then authors are making <em>choices</em> — about what to include, what to leave out, and whose perspective to center. Stories don't just tell reality. They <em>construct</em> it.
     </div>
 
-    <div class="card" style="margin-top: 1.5rem;">
-      <div class="card-question">One last thought.</div>
-      <div class="card-hint">If authors choose what goes into a story — what does that mean about the stories YOU consume every day?</div>
-      <textarea id="final-thought" placeholder="I think it means that..."></textarea>
-    </div>
-
-    <div class="btn-row">
-      <button class="btn btn-ghost" onclick="goTo(3)">← Back</button>
-      <button class="btn btn-primary" onclick="handleFinish()">Done ✓</button>
+    <div class="keep-open-banner">
+      <div class="banner-icon">📣</div>
+      <div class="banner-text">Please Keep This Screen Open</div>
+      <div class="banner-sub">We'll be sharing your findings when everyone comes back from breakout rooms.</div>
     </div>
   </div>
 
 </div>
 
 <script>
-  // Story elements to check
   const ELEMENTS = [
     { id: 'characters', label: 'Characters', desc: 'Are there people (or beings) you follow?' },
     { id: 'conflict', label: 'Conflict', desc: 'Is there a problem, struggle, or tension?' },
     { id: 'sequence', label: 'Sequence of events', desc: 'Do things happen in an order that matters?' },
-    { id: 'setting', label: 'Setting', desc: 'Is there a place or time where it happens?' },
     { id: 'change', label: 'Change', desc: 'Does someone or something change by the end?' },
-    { id: 'perspective', label: 'Point of view', desc: 'Is someone telling or showing the story?' },
-    { id: 'emotion', label: 'Emotional response', desc: 'Does it make you feel something?' },
-    { id: 'meaning', label: 'Meaning or message', desc: 'Does it teach, warn, or say something bigger?' }
+    { id: 'perspective', label: 'Point of view', desc: 'Is someone telling or showing the story?' }
   ];
 
   let storyNames = ['', '', ''];
-  let answers = {}; // { "0-characters": "yes", ... }
+  let answers = {};
   let currentStoryTab = 0;
   let claimChoice = null;
   let currentPage = 0;
 
-  // Init
   function init() {
     document.getElementById('next-0').addEventListener('click', () => {
       storyNames[0] = document.getElementById('story-1').value.trim();
@@ -685,9 +568,8 @@
     });
 
     document.getElementById('next-1').addEventListener('click', () => {
-      // check at least some answers
       const answered = Object.keys(answers).length;
-      if (answered < 12) {
+      if (answered < 8) {
         alert('Try to answer more of the questions — go through each story tab.');
         return;
       }
@@ -696,13 +578,15 @@
     });
 
     document.getElementById('next-2').addEventListener('click', () => goTo(3));
+
     document.getElementById('next-3').addEventListener('click', () => {
       if (!claimChoice) {
-        alert('Pick yes or no for your claim.');
+        alert('Pick an option for your claim first.');
         return;
       }
       buildPage4();
       goTo(4);
+      launchConfetti();
     });
 
     updateProgress();
@@ -722,17 +606,11 @@
       const label = document.getElementById('label-' + i);
       seg.classList.remove('active', 'completed');
       label.classList.remove('active', 'completed');
-      if (i < currentPage) {
-        seg.classList.add('completed');
-        label.classList.add('completed');
-      } else if (i === currentPage) {
-        seg.classList.add('active');
-        label.classList.add('active');
-      }
+      if (i < currentPage) { seg.classList.add('completed'); label.classList.add('completed'); }
+      else if (i === currentPage) { seg.classList.add('active'); label.classList.add('active'); }
     }
   }
 
-  // Page 1: build story tabs + toggle grid
   function buildPage1() {
     const tabsEl = document.getElementById('story-tabs');
     tabsEl.innerHTML = '';
@@ -749,9 +627,7 @@
 
   function switchTab(idx) {
     currentStoryTab = idx;
-    document.querySelectorAll('.story-tab').forEach((t, i) => {
-      t.classList.toggle('active', i === idx);
-    });
+    document.querySelectorAll('.story-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
     renderGrid(idx);
   }
 
@@ -768,8 +644,8 @@
           <div class="element-desc">${el.desc}</div>
         </div>
         <div class="toggle-btns">
-          <button class="toggle-btn ${answers[key]==='yes'?'selected-yes':''}" data-key="${key}" data-val="yes" onclick="setAnswer('${key}','yes',this)">Yes</button>
-          <button class="toggle-btn ${answers[key]==='no'?'selected-no':''}" data-key="${key}" data-val="no" onclick="setAnswer('${key}','no',this)">No</button>
+          <button class="toggle-btn ${answers[key]==='yes'?'selected-yes':''}" onclick="setAnswer('${key}','yes',this)">Yes</button>
+          <button class="toggle-btn ${answers[key]==='no'?'selected-no':''}" onclick="setAnswer('${key}','no',this)">No</button>
         </div>
       `;
       grid.appendChild(row);
@@ -783,7 +659,6 @@
     btn.classList.add(val === 'yes' ? 'selected-yes' : 'selected-no');
   }
 
-  // Page 2: build results matrix
   function buildPage2() {
     const table = document.getElementById('results-matrix');
     let html = '<thead><tr><th></th>';
@@ -794,7 +669,6 @@
     html += '<th style="text-align:center">All 3?</th></tr></thead><tbody>';
 
     let allYesElements = [];
-
     ELEMENTS.forEach(el => {
       html += `<tr><td>${el.label}</td>`;
       let yesCount = 0;
@@ -812,7 +686,6 @@
     html += '</tbody>';
     table.innerHTML = html;
 
-    // Insight
     const ins = document.getElementById('pattern-insight');
     if (allYesElements.length >= 3) {
       ins.innerHTML = `<p>Look at that — <strong>${allYesElements.join(', ')}</strong> showed up in all three of your stories. That's ${allYesElements.length} out of ${ELEMENTS.length} elements in common. Seems like there might be a pattern here.</p>`;
@@ -826,13 +699,12 @@
   function selectClaim(val) {
     claimChoice = val;
     document.getElementById('claim-yes').classList.toggle('selected', val === 'yes');
+    document.getElementById('claim-kinda').classList.toggle('selected', val === 'kinda');
     document.getElementById('claim-no').classList.toggle('selected', val === 'no');
   }
 
-  // Page 4: build final summary
   function buildPage4() {
     const evidence = document.getElementById('claim-evidence').value.trim() || '(no evidence written)';
-    const commonality = document.getElementById('common-input').value.trim() || '(not filled in)';
 
     let allYes = [];
     ELEMENTS.forEach(el => {
@@ -843,20 +715,78 @@
       if (count === 3) allYes.push(el.label.toLowerCase());
     });
 
+    const claimText = claimChoice === 'yes' ? 'DID follow a pattern' :
+                      claimChoice === 'kinda' ? 'KIND OF followed a pattern' :
+                      'DID NOT really follow a pattern';
+
     const box = document.getElementById('final-summary');
     box.innerHTML = `
       <p>Your group looked at <span class="highlight">${storyNames[0]}</span>, <span class="highlight">${storyNames[1]}</span>, and <span class="highlight">${storyNames[2]}</span>.</p>
       <br>
       <p>You found that all three stories shared: <span class="highlight">${allYes.length > 0 ? allYes.join(', ') : 'few common elements'}</span>.</p>
       <br>
-      <p>Your claim: Stories <span class="highlight">${claimChoice === 'yes' ? 'DO' : 'DO NOT'}</span> follow a pattern.</p>
+      <p>Your claim: Your stories <span class="highlight">${claimText}</span>.</p>
       <br>
       <p>Your reasoning: "${evidence}"</p>
     `;
   }
 
-  function handleFinish() {
-    alert('Nice work. You\'re ready to share with the class when we come back from breakout rooms.');
+  // ===== CONFETTI =====
+  function launchConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#D4A843', '#C97B3A', '#5C9E6A', '#E8E4DC', '#C75D5D', '#F5E6C4', '#FFD700', '#FF6B6B', '#6BCB77', '#4D96FF'];
+    const pieces = [];
+
+    for (let i = 0; i < 180; i++) {
+      pieces.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        w: Math.random() * 10 + 5,
+        h: Math.random() * 6 + 3,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vy: Math.random() * 3 + 1.5,
+        vx: (Math.random() - 0.5) * 2.5,
+        rotation: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 10,
+        opacity: 1
+      });
+    }
+
+    let frame = 0;
+    const maxFrames = 350;
+
+    function animate() {
+      frame++;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      pieces.forEach(p => {
+        p.y += p.vy;
+        p.x += p.vx;
+        p.rotation += p.rotSpeed;
+        p.vy += 0.02; // gravity
+        if (frame > maxFrames - 80) p.opacity = Math.max(0, p.opacity - 0.014);
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation * Math.PI / 180);
+        ctx.globalAlpha = p.opacity;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      });
+
+      if (frame < maxFrames) {
+        requestAnimationFrame(animate);
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    animate();
   }
 
   init();
