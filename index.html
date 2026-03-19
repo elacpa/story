@@ -83,26 +83,19 @@
   .progress-bar { display: flex; gap: 6px; margin-bottom: 2.5rem; }
 
   .progress-segment {
-    flex: 1;
-    height: 4px;
+    flex: 1; height: 4px;
     background: var(--dark-border);
     border-radius: 2px;
     transition: background 0.5s ease;
   }
-
   .progress-segment.active { background: var(--gold); }
   .progress-segment.completed { background: var(--green); }
 
   .step-label { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
-
   .step-label span {
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    transition: color 0.3s;
+    font-size: 0.65rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--text-dim); transition: color 0.3s;
   }
-
   .step-label span.active { color: var(--gold); font-weight: 600; }
   .step-label span.completed { color: var(--green); }
 
@@ -124,79 +117,224 @@
 
   .card-question {
     font-family: 'DM Serif Display', serif;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.35;
+    font-size: 1.2rem; margin-bottom: 0.5rem; line-height: 1.35;
   }
 
   .card-hint {
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    margin-bottom: 1.25rem;
-    line-height: 1.5;
+    font-size: 0.85rem; color: var(--text-dim);
+    margin-bottom: 1.25rem; line-height: 1.5;
   }
 
   .input-group { margin-bottom: 1rem; }
-
   .input-group label {
-    display: block;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 0.4rem;
-    font-weight: 600;
+    display: block; font-size: 0.75rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-dim);
+    margin-bottom: 0.4rem; font-weight: 600;
   }
 
   input[type="text"], textarea {
-    width: 100%;
-    background: var(--dark);
-    border: 1px solid var(--dark-border);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    transition: border-color 0.2s;
-    outline: none;
+    width: 100%; background: var(--dark);
+    border: 1px solid var(--dark-border); border-radius: 8px;
+    padding: 0.75rem 1rem; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+    transition: border-color 0.2s; outline: none;
   }
-
   input[type="text"]:focus, textarea:focus { border-color: var(--gold); }
   textarea { resize: vertical; min-height: 80px; }
   input::placeholder, textarea::placeholder { color: #555; }
 
+  /* ===== SPINNER ===== */
+  .spinner-section {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+
+  .spinner-label {
+    font-size: 0.7rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.75rem; font-weight: 600;
+  }
+
+  .spinner-sublabel {
+    font-size: 0.82rem; color: var(--text-dim);
+    margin-bottom: 1.25rem; line-height: 1.4;
+  }
+
+  .spinner-window {
+    position: relative;
+    height: 60px;
+    overflow: hidden;
+    background: var(--dark);
+    border: 2px solid var(--dark-border);
+    border-radius: 10px;
+    margin: 0 auto 1.25rem;
+    max-width: 480px;
+  }
+
+  .spinner-window::before,
+  .spinner-window::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; height: 18px;
+    z-index: 2; pointer-events: none;
+  }
+  .spinner-window::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--dark), transparent);
+  }
+  .spinner-window::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--dark), transparent);
+  }
+
+  .spinner-track {
+    position: absolute;
+    width: 100%;
+    transition: transform 0.1s linear;
+  }
+
+  .spinner-item {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    padding: 0 1rem;
+  }
+
+  .spinner-item .item-type {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-right: 0.6rem;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--dark-border);
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .spinner-window.landed {
+    border-color: var(--gold);
+    box-shadow: 0 0 20px var(--gold-glow);
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .spinner-btns {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-spin {
+    padding: 0.65rem 1.5rem;
+    border-radius: 8px;
+    border: 2px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-spin:hover { background: var(--gold); color: var(--dark); }
+  .btn-spin:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-spin:disabled:hover { background: transparent; color: var(--gold); }
+
+  .btn-add {
+    padding: 0.65rem 1.5rem;
+    border-radius: 8px;
+    border: 2px solid var(--green);
+    background: transparent;
+    color: var(--green);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: none;
+  }
+  .btn-add:hover { background: var(--green); color: #fff; }
+  .btn-add.visible { display: inline-flex; }
+
+  .or-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 1.25rem 0 0.25rem;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .or-divider::before, .or-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--dark-border);
+  }
+
+  /* Filled slots indicator */
+  .slot-tags {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    min-height: 30px;
+  }
+
+  .slot-tag {
+    padding: 0.3rem 0.75rem;
+    background: var(--green-glow);
+    border: 1px solid var(--green);
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: fadeUp 0.3s ease;
+  }
+
+  .slot-tag .remove-tag {
+    background: none; border: none;
+    color: var(--green); cursor: pointer;
+    font-size: 1rem; line-height: 1;
+    padding: 0; font-family: 'DM Sans', sans-serif;
+    opacity: 0.7;
+  }
+  .slot-tag .remove-tag:hover { opacity: 1; }
+
+  /* Toggle grid */
   .toggle-grid { display: flex; flex-direction: column; gap: 0.75rem; }
 
   .toggle-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--dark);
-    border: 1px solid var(--dark-border);
-    border-radius: 10px;
-    padding: 0.85rem 1.1rem;
-    transition: border-color 0.2s;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--dark); border: 1px solid var(--dark-border);
+    border-radius: 10px; padding: 0.85rem 1.1rem; transition: border-color 0.2s;
   }
-
   .toggle-row .element-label { font-size: 0.95rem; font-weight: 500; }
   .toggle-row .element-desc { font-size: 0.78rem; color: var(--text-dim); margin-top: 2px; }
 
   .toggle-btns { display: flex; gap: 6px; flex-shrink: 0; margin-left: 1rem; }
 
   .toggle-btn {
-    width: 42px;
-    height: 32px;
-    border: 1px solid var(--dark-border);
-    border-radius: 6px;
-    background: transparent;
-    color: var(--text-dim);
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: 'DM Sans', sans-serif;
+    width: 42px; height: 32px;
+    border: 1px solid var(--dark-border); border-radius: 6px;
+    background: transparent; color: var(--text-dim);
+    font-size: 0.75rem; font-weight: 600; cursor: pointer;
+    transition: all 0.2s; font-family: 'DM Sans', sans-serif;
   }
-
   .toggle-btn:hover { border-color: var(--text-dim); }
   .toggle-btn.selected-yes { background: var(--green); border-color: var(--green); color: #fff; }
   .toggle-btn.selected-no { background: var(--red-soft); border-color: var(--red-soft); color: #fff; }
@@ -204,39 +342,24 @@
   .story-tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; }
 
   .story-tab {
-    padding: 0.45rem 1rem;
-    border: 1px solid var(--dark-border);
-    border-radius: 20px;
-    background: transparent;
-    color: var(--text-dim);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
+    padding: 0.45rem 1rem; border: 1px solid var(--dark-border);
+    border-radius: 20px; background: transparent; color: var(--text-dim);
+    font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
+    font-weight: 600; cursor: pointer; transition: all 0.2s;
   }
-
   .story-tab.active { background: var(--gold); border-color: var(--gold); color: var(--dark); }
 
   .matrix { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
-
   .matrix th {
-    text-align: left;
-    padding: 0.6rem 0.75rem;
-    border-bottom: 2px solid var(--gold);
-    color: var(--gold);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 700;
+    text-align: left; padding: 0.6rem 0.75rem;
+    border-bottom: 2px solid var(--gold); color: var(--gold);
+    font-size: 0.7rem; letter-spacing: 0.12em;
+    text-transform: uppercase; font-weight: 700;
   }
-
   .matrix td {
     padding: 0.6rem 0.75rem;
-    border-bottom: 1px solid var(--dark-border);
-    vertical-align: middle;
+    border-bottom: 1px solid var(--dark-border); vertical-align: middle;
   }
-
   .matrix .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
   .matrix .dot.yes { background: var(--green); box-shadow: 0 0 6px var(--green-glow); }
   .matrix .dot.no { background: var(--red-soft); }
@@ -247,98 +370,63 @@
     background: var(--gold-glow);
     border-left: 3px solid var(--gold);
     border-radius: 0 10px 10px 0;
-    padding: 1.25rem 1.5rem;
-    margin: 1.5rem 0;
+    padding: 1.25rem 1.5rem; margin: 1.5rem 0;
   }
-
   .insight p { font-size: 0.95rem; line-height: 1.6; color: var(--text); }
   .insight strong { color: var(--gold); }
 
   .btn-row { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; gap: 1rem; }
 
   .btn {
-    padding: 0.7rem 1.75rem;
-    border-radius: 8px;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
+    padding: 0.7rem 1.75rem; border-radius: 8px; border: none;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    font-weight: 600; cursor: pointer; transition: all 0.2s;
   }
-
   .btn-primary { background: var(--gold); color: var(--dark); }
   .btn-primary:hover { background: #E0B850; transform: translateY(-1px); }
 
   .btn-ghost {
-    background: none;
-    border: none;
-    color: var(--text-dim);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    cursor: pointer;
-    padding: 0.5rem;
+    background: none; border: none; color: var(--text-dim);
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+    cursor: pointer; padding: 0.5rem;
   }
-
   .btn-ghost:hover { color: var(--text); }
 
   .claim-toggle { display: flex; gap: 10px; margin-bottom: 1.25rem; }
 
   .claim-option {
-    flex: 1;
-    padding: 1rem;
-    border: 2px solid var(--dark-border);
-    border-radius: 10px;
-    background: var(--dark);
-    color: var(--text-dim);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.2s;
+    flex: 1; padding: 1rem;
+    border: 2px solid var(--dark-border); border-radius: 10px;
+    background: var(--dark); color: var(--text-dim);
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+    font-weight: 700; cursor: pointer; text-align: center; transition: all 0.2s;
   }
-
   .claim-option:hover { border-color: var(--text-dim); }
   .claim-option.selected { border-color: var(--gold); color: var(--gold); background: var(--gold-glow); }
 
   .summary-box {
-    background: var(--dark);
-    border: 1px solid var(--dark-border);
-    border-radius: 10px;
-    padding: 1.5rem;
-    margin: 1rem 0;
-    line-height: 1.7;
-    font-size: 0.95rem;
+    background: var(--dark); border: 1px solid var(--dark-border);
+    border-radius: 10px; padding: 1.5rem; margin: 1rem 0;
+    line-height: 1.7; font-size: 0.95rem;
   }
-
   .summary-box .highlight { color: var(--gold); font-weight: 600; }
 
   .final-insight {
     font-family: 'DM Serif Display', serif;
-    font-size: 1.3rem;
-    text-align: center;
-    line-height: 1.5;
-    color: var(--text);
-    max-width: 540px;
-    margin: 1.5rem auto;
+    font-size: 1.3rem; text-align: center; line-height: 1.5;
+    color: var(--text); max-width: 540px; margin: 1.5rem auto;
   }
-
   .final-insight em { color: var(--gold); font-style: italic; }
 
   .confetti-canvas {
-    position: fixed;
-    top: 0; left: 0;
+    position: fixed; top: 0; left: 0;
     width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 9998;
+    pointer-events: none; z-index: 9998;
   }
 
   .celebration-emoji {
-    font-size: 4.5rem;
-    text-align: center;
-    margin-bottom: 0.5rem;
-    animation: bounceIn 0.6s ease;
+    font-size: 4.5rem; text-align: center;
+    margin-bottom: 0.5rem; animation: bounceIn 0.6s ease;
   }
 
   @keyframes bounceIn {
@@ -350,45 +438,33 @@
   .celebration-title {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(1.6rem, 4.5vw, 2.4rem);
-    text-align: center;
-    color: var(--gold);
-    margin-bottom: 0.3rem;
-    animation: fadeUp 0.5s ease 0.2s both;
+    text-align: center; color: var(--gold);
+    margin-bottom: 0.3rem; animation: fadeUp 0.5s ease 0.2s both;
   }
 
   .celebration-subtitle {
-    text-align: center;
-    color: var(--text-dim);
-    font-size: 1rem;
-    margin-bottom: 2rem;
+    text-align: center; color: var(--text-dim);
+    font-size: 1rem; margin-bottom: 2rem;
     animation: fadeUp 0.5s ease 0.35s both;
   }
 
   .keep-open-banner {
     background: linear-gradient(135deg, #D4A843 0%, #C97B3A 100%);
-    color: var(--dark);
-    border-radius: 14px;
-    padding: 1.75rem 2rem;
-    text-align: center;
+    color: var(--dark); border-radius: 14px;
+    padding: 1.75rem 2rem; text-align: center;
     margin: 2.5rem 0 1rem;
     animation: pulseBorder 2s ease-in-out infinite alternate;
     box-shadow: 0 0 30px rgba(212, 168, 67, 0.25);
   }
-
   .keep-open-banner .banner-icon { font-size: 2rem; margin-bottom: 0.5rem; }
-
   .keep-open-banner .banner-text {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(1.2rem, 3.5vw, 1.6rem);
-    font-weight: 700;
-    line-height: 1.3;
+    font-weight: 700; line-height: 1.3;
   }
-
   .keep-open-banner .banner-sub {
-    font-size: 0.88rem;
-    margin-top: 0.4rem;
-    opacity: 0.85;
-    font-weight: 500;
+    font-size: 0.88rem; margin-top: 0.4rem;
+    opacity: 0.85; font-weight: 500;
   }
 
   @keyframes pulseBorder {
@@ -396,20 +472,125 @@
     to { box-shadow: 0 0 45px rgba(212, 168, 67, 0.45); }
   }
 
+  /* ===== CUSTOM POPUP ===== */
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .popup-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .popup-box {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    border-radius: 14px;
+    padding: 2rem;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    transform: scale(0.9) translateY(10px);
+    transition: transform 0.25s ease;
+  }
+
+  .popup-overlay.show .popup-box {
+    transform: scale(1) translateY(0);
+  }
+
+  .popup-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .popup-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .popup-msg {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  .popup-msg .missing {
+    color: var(--red-soft);
+    font-weight: 600;
+  }
+
+  .popup-msg .emoji-check {
+    color: var(--green);
+  }
+
+  .popup-btns {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .popup-btn {
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .popup-btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+  }
+  .popup-btn-primary:hover { background: #E0B850; }
+
+  .popup-btn-secondary {
+    background: transparent;
+    border: 1px solid var(--dark-border);
+    color: var(--text-dim);
+  }
+  .popup-btn-secondary:hover { border-color: var(--text-dim); color: var(--text); }
+
   @media (max-width: 600px) {
     .container { padding: 1.25rem 1rem 3rem; }
-    .card { padding: 1.25rem; }
+    .card, .spinner-section { padding: 1.25rem; }
     .toggle-row { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
     .toggle-btns { margin-left: 0; }
     .matrix { font-size: 0.75rem; }
     .matrix th, .matrix td { padding: 0.45rem 0.5rem; }
     .claim-toggle { flex-direction: column; }
+    .spinner-btns { flex-direction: column; align-items: stretch; }
   }
 </style>
 </head>
 <body>
 
 <canvas class="confetti-canvas" id="confetti-canvas"></canvas>
+
+<!-- Custom Popup -->
+<div class="popup-overlay" id="popup-overlay">
+  <div class="popup-box">
+    <div class="popup-icon" id="popup-icon"></div>
+    <div class="popup-title" id="popup-title"></div>
+    <div class="popup-msg" id="popup-msg"></div>
+    <div class="popup-btns" id="popup-btns"></div>
+  </div>
+</div>
 
 <div class="container">
 
@@ -436,6 +617,26 @@
 
   <!-- PAGE 0 -->
   <div class="page active" id="page-0">
+
+    <!-- Idea Generator -->
+    <div class="spinner-section">
+      <div class="spinner-label">Idea Generator</div>
+      <div class="spinner-sublabel">Need ideas? Spin for a random story — if your whole group has heard of it, add it to your list.</div>
+
+      <div class="spinner-window" id="spinner-window">
+        <div class="spinner-track" id="spinner-track"></div>
+      </div>
+
+      <div class="spinner-btns">
+        <button class="btn-spin" id="btn-spin" onclick="spin()">🎰 Spin</button>
+        <button class="btn-add" id="btn-add" onclick="addSpinResult()">✓ We all know this one — add it</button>
+      </div>
+
+      <div class="slot-tags" id="slot-tags"></div>
+    </div>
+
+    <div class="or-divider">or type your own</div>
+
     <div class="card">
       <div class="card-question">What are 3 stories your whole group knows?</div>
       <div class="card-hint">Movies, books, shows, video games, real-life stories — anything counts. Pick ones everyone in the group can talk about.</div>
@@ -517,17 +718,13 @@
     <div class="celebration-emoji">🏆</div>
     <div class="celebration-title">Congrats — You're Teamwork Masters</div>
     <div class="celebration-subtitle">You just reverse-engineered what makes a story a story.</div>
-
     <div class="summary-box" id="final-summary"></div>
-
     <div class="insight">
       <p>Some elements — like <strong>conflict</strong> — show up in almost every story. But others — like <strong>a villain</strong> or <strong>a happy ending</strong> — don't always make the cut. That's the interesting part. Stories share some ingredients, but not all of them. So what's required, and what's a choice the author makes?</p>
     </div>
-
     <div class="final-insight">
       If stories follow patterns, then authors are making <em>choices</em> — about what to include, what to leave out, and whose perspective to center. Stories don't just tell reality. They <em>construct</em> it.
     </div>
-
     <div class="keep-open-banner">
       <div class="banner-icon">📣</div>
       <div class="banner-text">Please Keep This Screen Open</div>
@@ -538,6 +735,79 @@
 </div>
 
 <script>
+  // ===== 200 STORIES =====
+  const STORIES = [
+    // MOVIES
+    {t:"The Lion King",c:"Movie"},{t:"Titanic",c:"Movie"},{t:"Black Panther",c:"Movie"},{t:"The Avengers",c:"Movie"},
+    {t:"Spider-Man: Into the Spider-Verse",c:"Movie"},{t:"Frozen",c:"Movie"},{t:"Finding Nemo",c:"Movie"},{t:"The Dark Knight",c:"Movie"},
+    {t:"Get Out",c:"Movie"},{t:"Coco",c:"Movie"},{t:"Shrek",c:"Movie"},{t:"Mean Girls",c:"Movie"},
+    {t:"The Hunger Games",c:"Movie"},{t:"Harry Potter and the Sorcerer's Stone",c:"Movie"},{t:"Star Wars: A New Hope",c:"Movie"},{t:"Toy Story",c:"Movie"},
+    {t:"Inside Out",c:"Movie"},{t:"The Wizard of Oz",c:"Movie"},{t:"Moana",c:"Movie"},{t:"Jurassic Park",c:"Movie"},
+    {t:"The Incredibles",c:"Movie"},{t:"Up",c:"Movie"},{t:"Encanto",c:"Movie"},{t:"The Little Mermaid",c:"Movie"},
+    {t:"Ratatouille",c:"Movie"},{t:"Jaws",c:"Movie"},{t:"The Matrix",c:"Movie"},{t:"Forrest Gump",c:"Movie"},
+    {t:"The Notebook",c:"Movie"},{t:"A Quiet Place",c:"Movie"},{t:"Inception",c:"Movie"},{t:"Wonder Woman",c:"Movie"},
+    {t:"The Karate Kid",c:"Movie"},{t:"Rocky",c:"Movie"},{t:"E.T.",c:"Movie"},{t:"Wall-E",c:"Movie"},
+    {t:"Monsters, Inc.",c:"Movie"},{t:"10 Things I Hate About You",c:"Movie"},{t:"The Pursuit of Happyness",c:"Movie"},
+    {t:"Interstellar",c:"Movie"},{t:"Spider-Man: No Way Home",c:"Movie"},{t:"Everything Everywhere All at Once",c:"Movie"},
+    {t:"The Truman Show",c:"Movie"},{t:"Spirited Away",c:"Movie"},{t:"Soul",c:"Movie"},{t:"Turning Red",c:"Movie"},
+    {t:"Tangled",c:"Movie"},{t:"Aladdin",c:"Movie"},{t:"The Princess Bride",c:"Movie"},{t:"Grease",c:"Movie"},
+    {t:"The Breakfast Club",c:"Movie"},{t:"Ferris Bueller's Day Off",c:"Movie"},{t:"Back to the Future",c:"Movie"},
+    {t:"The Grinch",c:"Movie"},{t:"Home Alone",c:"Movie"},{t:"Lilo & Stitch",c:"Movie"},
+    {t:"Mulan",c:"Movie"},{t:"Zootopia",c:"Movie"},{t:"Oppenheimer",c:"Movie"},{t:"Barbie",c:"Movie"},
+    {t:"John Wick",c:"Movie"},{t:"It",c:"Movie"},{t:"The Conjuring",c:"Movie"},{t:"Knives Out",c:"Movie"},
+    {t:"Creed",c:"Movie"},{t:"Moonlight",c:"Movie"},{t:"La La Land",c:"Movie"},{t:"Bohemian Rhapsody",c:"Movie"},
+    {t:"A Star Is Born",c:"Movie"},{t:"12 Years a Slave",c:"Movie"},
+
+    // TV SHOWS
+    {t:"Stranger Things",c:"Show"},{t:"The Office",c:"Show"},{t:"Friends",c:"Show"},{t:"Breaking Bad",c:"Show"},
+    {t:"Squid Game",c:"Show"},{t:"Wednesday",c:"Show"},{t:"Cobra Kai",c:"Show"},{t:"The Walking Dead",c:"Show"},
+    {t:"Game of Thrones",c:"Show"},{t:"Avatar: The Last Airbender",c:"Show"},{t:"SpongeBob SquarePants",c:"Show"},
+    {t:"Grey's Anatomy",c:"Show"},{t:"Riverdale",c:"Show"},{t:"13 Reasons Why",c:"Show"},
+    {t:"Outer Banks",c:"Show"},{t:"All American",c:"Show"},{t:"On My Block",c:"Show"},
+    {t:"Euphoria",c:"Show"},{t:"The 100",c:"Show"},{t:"Naruto",c:"Show"},
+    {t:"Attack on Titan",c:"Show"},{t:"One Piece",c:"Show"},{t:"Dragon Ball Z",c:"Show"},
+    {t:"Demon Slayer",c:"Show"},{t:"The Mandalorian",c:"Show"},{t:"Arcane",c:"Show"},
+    {t:"Invincible",c:"Show"},{t:"The Boys",c:"Show"},{t:"Money Heist",c:"Show"},
+    {t:"You",c:"Show"},{t:"Bridgerton",c:"Show"},{t:"The Bear",c:"Show"},
+    {t:"Abbott Elementary",c:"Show"},{t:"Rick and Morty",c:"Show"},{t:"The Simpsons",c:"Show"},
+    {t:"Family Guy",c:"Show"},{t:"The Fresh Prince of Bel-Air",c:"Show"},{t:"Gravity Falls",c:"Show"},
+    {t:"Phineas and Ferb",c:"Show"},{t:"Teen Wolf",c:"Show"},
+
+    // BOOKS
+    {t:"The Hunger Games (book)",c:"Book"},{t:"Harry Potter series",c:"Book"},{t:"The Outsiders",c:"Book"},
+    {t:"To Kill a Mockingbird",c:"Book"},{t:"The Giver",c:"Book"},{t:"Romeo and Juliet",c:"Book"},
+    {t:"The Great Gatsby",c:"Book"},{t:"Lord of the Flies",c:"Book"},{t:"Of Mice and Men",c:"Book"},
+    {t:"Diary of a Wimpy Kid",c:"Book"},{t:"Percy Jackson series",c:"Book"},{t:"The Hate U Give",c:"Book"},
+    {t:"1984",c:"Book"},{t:"Fahrenheit 451",c:"Book"},{t:"Animal Farm",c:"Book"},
+    {t:"The Maze Runner",c:"Book"},{t:"Divergent",c:"Book"},{t:"A Wrinkle in Time",c:"Book"},
+    {t:"The Fault in Our Stars",c:"Book"},{t:"Wonder",c:"Book"},{t:"Holes",c:"Book"},
+    {t:"The Lightning Thief",c:"Book"},{t:"Charlotte's Web",c:"Book"},{t:"The Hobbit",c:"Book"},
+    {t:"Twilight",c:"Book"},{t:"The Alchemist",c:"Book"},{t:"Long Way Down",c:"Book"},
+    {t:"The Kite Runner",c:"Book"},{t:"Frankenstein",c:"Book"},{t:"Macbeth",c:"Book"},
+
+    // VIDEO GAMES
+    {t:"Minecraft",c:"Game"},{t:"Fortnite",c:"Game"},{t:"The Last of Us",c:"Game"},
+    {t:"God of War",c:"Game"},{t:"Red Dead Redemption 2",c:"Game"},{t:"The Legend of Zelda: Breath of the Wild",c:"Game"},
+    {t:"GTA V",c:"Game"},{t:"Among Us",c:"Game"},{t:"Mario Kart",c:"Game"},
+    {t:"Super Smash Bros.",c:"Game"},{t:"Pokémon",c:"Game"},{t:"Call of Duty",c:"Game"},
+    {t:"Roblox",c:"Game"},{t:"Spider-Man (PS4/PS5)",c:"Game"},{t:"Undertale",c:"Game"},
+    {t:"Five Nights at Freddy's",c:"Game"},{t:"Detroit: Become Human",c:"Game"},{t:"It Takes Two",c:"Game"},
+    {t:"Zelda: Tears of the Kingdom",c:"Game"},{t:"Elden Ring",c:"Game"},
+
+    // REAL LIFE / OTHER
+    {t:"The Cinderella story (fairy tale)",c:"Story"},{t:"The Tortoise and the Hare",c:"Story"},
+    {t:"The Three Little Pigs",c:"Story"},{t:"Little Red Riding Hood",c:"Story"},
+    {t:"The Boy Who Cried Wolf",c:"Story"},{t:"Jack and the Beanstalk",c:"Story"},
+    {t:"Goldilocks and the Three Bears",c:"Story"},{t:"Snow White",c:"Story"},
+    {t:"The story of Rosa Parks",c:"Real Life"},{t:"The story of MLK Jr.",c:"Real Life"},
+    {t:"The Titanic (real event)",c:"Real Life"},{t:"The Apollo 11 moon landing",c:"Real Life"},
+    {t:"The story of Malala Yousafzai",c:"Real Life"},{t:"9/11",c:"Real Life"},
+    {t:"The Underground Railroad",c:"Real Life"},{t:"The story of Anne Frank",c:"Real Life"},
+    {t:"Ruby Bridges going to school",c:"Real Life"},{t:"COVID-19 pandemic",c:"Real Life"},
+    {t:"Kobe Bryant's legacy",c:"Real Life"},{t:"Michael Jordan's career",c:"Real Life"}
+  ];
+
+  // ===== STATE =====
   const ELEMENTS = [
     { id: 'conflict', label: 'A main conflict', desc: 'Is there a central problem, struggle, or tension driving things forward?' },
     { id: 'hero', label: 'A likable hero', desc: 'Is there a main character you actually root for?' },
@@ -553,13 +823,182 @@
   let claimChoice = null;
   let currentPage = 0;
 
+  // Spinner state
+  let spinning = false;
+  let landedStory = null;
+  let usedIndices = new Set();
+
+  // ===== SPINNER =====
+  function spin() {
+    if (spinning) return;
+    const filledCount = [
+      document.getElementById('story-1').value.trim(),
+      document.getElementById('story-2').value.trim(),
+      document.getElementById('story-3').value.trim()
+    ].filter(Boolean).length;
+    if (filledCount >= 3) {
+      showPopup({
+        icon: '✅',
+        title: 'You\'re all set',
+        msg: 'You already have 3 stories filled in. If you want to swap one out, clear it first by clicking the × on the tag below.',
+        buttons: [{ label: 'Got it', style: 'primary' }]
+      });
+      return;
+    }
+
+    spinning = true;
+    landedStory = null;
+    document.getElementById('btn-spin').disabled = true;
+    document.getElementById('btn-add').classList.remove('visible');
+    const win = document.getElementById('spinner-window');
+    win.classList.remove('landed');
+
+    // Pick random items for the reel + final result
+    const available = STORIES.map((s, i) => i).filter(i => !usedIndices.has(i));
+    if (available.length < 20) usedIndices.clear(); // reset if running low
+
+    const reelCount = 25;
+    const reelIndices = [];
+    for (let i = 0; i < reelCount; i++) {
+      reelIndices.push(available[Math.floor(Math.random() * available.length)]);
+    }
+    // Final pick
+    const finalIdx = available[Math.floor(Math.random() * available.length)];
+    reelIndices.push(finalIdx);
+
+    // Build track
+    const track = document.getElementById('spinner-track');
+    track.innerHTML = '';
+    reelIndices.forEach(idx => {
+      const s = STORIES[idx];
+      const div = document.createElement('div');
+      div.className = 'spinner-item';
+      div.innerHTML = `<span class="item-type">${s.c}</span> ${s.t}`;
+      track.appendChild(div);
+    });
+
+    // Animate
+    const itemH = 60;
+    let pos = 0;
+    const totalDistance = (reelIndices.length - 1) * itemH;
+    const duration = 2800;
+    const start = performance.now();
+
+    function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+
+    function animateScroll(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOutQuart(progress);
+      pos = eased * totalDistance;
+      track.style.transform = `translateY(${-pos}px)`;
+
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      } else {
+        // Landed
+        spinning = false;
+        landedStory = STORIES[finalIdx];
+        usedIndices.add(finalIdx);
+        document.getElementById('btn-spin').disabled = false;
+        document.getElementById('btn-add').classList.add('visible');
+        win.classList.add('landed');
+      }
+    }
+
+    requestAnimationFrame(animateScroll);
+  }
+
+  function addSpinResult() {
+    if (!landedStory) return;
+    const inputs = ['story-1', 'story-2', 'story-3'];
+    for (const id of inputs) {
+      if (!document.getElementById(id).value.trim()) {
+        document.getElementById(id).value = landedStory.t;
+        document.getElementById('btn-add').classList.remove('visible');
+        landedStory = null;
+        renderSlotTags();
+        return;
+      }
+    }
+    showPopup({
+      icon: '✅',
+      title: 'All slots full',
+      msg: 'All 3 story slots are filled. Clear one first by clicking the × on a tag below.',
+      buttons: [{ label: 'Got it', style: 'primary' }]
+    });
+  }
+
+  function renderSlotTags() {
+    const container = document.getElementById('slot-tags');
+    container.innerHTML = '';
+    ['story-1', 'story-2', 'story-3'].forEach((id, i) => {
+      const val = document.getElementById(id).value.trim();
+      if (val) {
+        const tag = document.createElement('div');
+        tag.className = 'slot-tag';
+        tag.innerHTML = `${val} <button class="remove-tag" onclick="clearSlot('${id}')">&times;</button>`;
+        container.appendChild(tag);
+      }
+    });
+  }
+
+  function clearSlot(id) {
+    document.getElementById(id).value = '';
+    renderSlotTags();
+  }
+
+  // Watch for manual typing
+  ['story-1', 'story-2', 'story-3'].forEach(id => {
+    document.getElementById(id).addEventListener('input', renderSlotTags);
+  });
+
+  // ===== POPUP SYSTEM =====
+  function showPopup({ icon, title, msg, buttons }) {
+    const overlay = document.getElementById('popup-overlay');
+    document.getElementById('popup-icon').textContent = icon || '';
+    document.getElementById('popup-title').textContent = title || '';
+    document.getElementById('popup-msg').innerHTML = msg || '';
+    const btnsEl = document.getElementById('popup-btns');
+    btnsEl.innerHTML = '';
+    (buttons || [{ label: 'Got it', style: 'primary', action: closePopup }]).forEach(b => {
+      const btn = document.createElement('button');
+      btn.className = 'popup-btn popup-btn-' + (b.style || 'primary');
+      btn.textContent = b.label;
+      btn.addEventListener('click', () => { closePopup(); if (b.action) b.action(); });
+      btnsEl.appendChild(btn);
+    });
+    overlay.classList.add('show');
+  }
+
+  function closePopup() {
+    document.getElementById('popup-overlay').classList.remove('show');
+  }
+
+  // Close popup on overlay click
+  document.getElementById('popup-overlay').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closePopup();
+  });
+
+  // ===== MAIN APP =====
   function init() {
     document.getElementById('next-0').addEventListener('click', () => {
       storyNames[0] = document.getElementById('story-1').value.trim();
       storyNames[1] = document.getElementById('story-2').value.trim();
       storyNames[2] = document.getElementById('story-3').value.trim();
-      if (!storyNames[0] || !storyNames[1] || !storyNames[2]) {
-        alert('Fill in all three stories before moving on.');
+
+      const missing = [];
+      if (!storyNames[0]) missing.push('Story 1');
+      if (!storyNames[1]) missing.push('Story 2');
+      if (!storyNames[2]) missing.push('Story 3');
+
+      if (missing.length > 0) {
+        showPopup({
+          icon: '✏️',
+          title: 'Not so fast',
+          msg: 'You need all 3 stories filled in before you can move on.<br><br>Still missing: <span class="missing">' + missing.join(', ') + '</span><br><br>Use the spinner above or type them in yourself.',
+          buttons: [{ label: 'Got it', style: 'primary' }]
+        });
         return;
       }
       buildPage1();
@@ -567,11 +1006,42 @@
     });
 
     document.getElementById('next-1').addEventListener('click', () => {
-      const answered = Object.keys(answers).length;
-      if (answered < 10) {
-        alert('Try to answer more of the questions — go through each story tab.');
+      // Check all 3 stories have been answered
+      const storiesAnswered = [0, 1, 2].map(si => {
+        return ELEMENTS.filter(el => answers[si + '-' + el.id]).length;
+      });
+      const incomplete = [];
+      if (storiesAnswered[0] < ELEMENTS.length) incomplete.push(storyNames[0]);
+      if (storiesAnswered[1] < ELEMENTS.length) incomplete.push(storyNames[1]);
+      if (storiesAnswered[2] < ELEMENTS.length) incomplete.push(storyNames[2]);
+
+      if (incomplete.length > 0) {
+        showPopup({
+          icon: '🔍',
+          title: 'You missed some',
+          msg: 'You need to answer every question for all three stories.<br><br>Still incomplete: <span class="missing">' + incomplete.join(', ') + '</span><br><br>Use the tabs at the top to switch between stories.',
+          buttons: [{ label: 'Got it', style: 'primary' }]
+        });
         return;
       }
+
+      // Check if ALL answers are "yes" across ALL stories
+      const totalYes = Object.values(answers).filter(v => v === 'yes').length;
+      const totalAnswers = Object.keys(answers).length;
+
+      if (totalYes === totalAnswers && totalAnswers === ELEMENTS.length * 3) {
+        showPopup({
+          icon: '🤔',
+          title: 'Wait — really?',
+          msg: 'You said <strong>yes</strong> to everything for all three stories. Are you sure they ALL had a villain? ALL had a happy ending? ALL had a likable hero?<br><br>Go back and really debate it with your group. That\'s where the good stuff happens.',
+          buttons: [
+            { label: 'Let me go back and check', style: 'primary' },
+            { label: 'Yeah, we\'re sure', style: 'secondary', action: () => { buildPage2(); goTo(2); } }
+          ]
+        });
+        return;
+      }
+
       buildPage2();
       goTo(2);
     });
@@ -580,7 +1050,12 @@
 
     document.getElementById('next-3').addEventListener('click', () => {
       if (!claimChoice) {
-        alert('Pick an option for your claim first.');
+        showPopup({
+          icon: '👆',
+          title: 'Pick one',
+          msg: 'You need to choose an option for your claim before you can see your results.',
+          buttons: [{ label: 'Got it', style: 'primary' }]
+        });
         return;
       }
       buildPage4();
@@ -745,7 +1220,7 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const colors = ['#D4A843', '#C97B3A', '#5C9E6A', '#E8E4DC', '#C75D5D', '#F5E6C4', '#FFD700', '#FF6B6B', '#6BCB77', '#4D96FF'];
+    const colors = ['#D4A843','#C97B3A','#5C9E6A','#E8E4DC','#C75D5D','#F5E6C4','#FFD700','#FF6B6B','#6BCB77','#4D96FF'];
     const pieces = [];
 
     for (let i = 0; i < 180; i++) {
@@ -769,14 +1244,10 @@
     function animate() {
       frame++;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       pieces.forEach(p => {
-        p.y += p.vy;
-        p.x += p.vx;
-        p.rotation += p.rotSpeed;
-        p.vy += 0.02;
+        p.y += p.vy; p.x += p.vx;
+        p.rotation += p.rotSpeed; p.vy += 0.02;
         if (frame > maxFrames - 80) p.opacity = Math.max(0, p.opacity - 0.014);
-
         ctx.save();
         ctx.translate(p.x, p.y);
         ctx.rotate(p.rotation * Math.PI / 180);
@@ -785,14 +1256,9 @@
         ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
         ctx.restore();
       });
-
-      if (frame < maxFrames) {
-        requestAnimationFrame(animate);
-      } else {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-      }
+      if (frame < maxFrames) requestAnimationFrame(animate);
+      else ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
-
     animate();
   }
 
